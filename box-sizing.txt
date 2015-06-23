@@ -1,2 +1,6 @@
-The box-sizing is the total size of the box including the size of content,border,padding and margin.By default the box-sizing is set to content-box. If the box-sizing is set to border-box it says that the size of the box is inclusive of the content. For instance if the total width is 100px with a padding 6px, border of 2px solid blue, the total width is 100+6+6+2+2 = 116px.
-In case if the box-sizing is set to border-box the total width is 100px inclusive of padding 6px and border 2px.The total width will still be 100px.This doesn’t include the margin size.
+The box-sizing is the total size of the box including the size of content,border,padding and margin.
+By default the box-sizing is set to content-box. If the box-sizing is set to border-box it says that 
+the size of the box is inclusive of the content. For instance if the total width is 100px with a 
+padding 6px, border of 2px solid blue, the total width is 100+6+6+2+2 = 116px.
+In case if the box-sizing is set to border-box the total width is 100px inclusive of padding 
+6px and border 2px.The total width will still be 100px.This doesn’t include the margin size.
