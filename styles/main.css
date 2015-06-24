@@ -51,7 +51,12 @@ html {
      text-decoration: none;
      cursor: pointer;
  }
- 
+ /* The background color changes when the link is active */
+.navbar-link:active
+{
+     color: rgb(233,50,117);
+     background-color: white;
+}
    /* #5 */
  .links-container .navbar-link:hover {
      color: rgb(233,50,117);
