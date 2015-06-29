@@ -1,14 +1,16 @@
 
 
-var points = document.getElementsByClassName('point');
+var point = document.getElementsByClassName('point');
 
-function revealPoint(point){
-	for(var i=0; i<point.length;i++)
-	{
-		point[i].style.opacity = 1;
-		point[i].style.transform  = 'scaleX(1) translateY(0)';
-		point[i].style.msTransform = 'scaleX(1) translateY(0)';
-		point[i].style.WebkitTransform = 'scaleX(1) translateY(0)';
-	}
+
+function revealPoint(i)
+{
+	point[i].style.opacity = 1;
+	point[i].style.transform  = 'scaleX(1) translateY(0)';
+	point[i].style.msTransform = 'scaleX(1) translateY(0)';
+	point[i].style.WebkitTransform = 'scaleX(1) translateY(0)';
 }
-revealPoint(points);
+for(var i = 0; i< point.length;i++)
+{
+	revealPoint(i);
+}
