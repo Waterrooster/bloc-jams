@@ -92,6 +92,37 @@ body.album {
  .song-item-duration {
      width: 5%;
  }
+ 
+
+ .album-song-button {
+     text-align: center;
+     font-size: 17px;
+     background-color: white;
+     color: rgb(210, 40, 123);
+     border-radius: 50% 50%;
+     display: inline-block;
+     width: 29px;
+     padding-top: 5px;
+     height: 28px;
+ }
+ 
+ .album-song-button:hover {
+     cursor: pointer;
+     color: white;
+     background-color: rgb(210, 40, 123);
+ }
+ 
+ .album-song-button i {
+     line-height: 28px;
+ }
+ 
+ .album-song-button .fa-play {
+     padding-left: 5px;
+ }
+ 
+ .album-song-listing td {
+     vertical-align: middle;
+ }
  .song-item-repeat
  {
      width: 5%;
