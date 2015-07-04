@@ -91,19 +91,32 @@ var albumPicasso = {
 
      function findParentByClassName(element,targetClass)
      {
-        if(element.parentElement == null)
+        // if(element.parentElement)
+        // {
+        //     currentParent = element.parentElement;
+        //     if(currentParent.className != null)
+        //     {
+        //         while(currentParent.className != targetClass)
+        //         {
+        //             currentParent = currentParent.parentElement;
+        //         }
+        //     }
+        //     else
+        //     {
+        //         alert('no parent with this class name');
+        //     }
+        //     return currentParent;
+        // }
+        // else
+        // {
+        //     alert('no parent found');
+        // }
+
+        currentParent = element.parentElement;
+        while(currentParent.className != targetClass)
         {
-            currentParent = element;
+            currentParent = currentParent.parentElement;
         }
-        else
-        {
-            currentParent = element.parentElement;    
-    
-            while(currentParent.className != targetClass && currentParent.className != null)
-                {
-                   currentParent = currentParent.parentElement;
-                }    
-        }    
         return currentParent;
      }
 
@@ -167,14 +180,16 @@ window.onload = function()
    
         songListContainer.addEventListener('mouseover',function(event)
         {
-            var songItemNumber = event.target.className;
-            var songChildItem = findParentByClassName(event.target,'song-item-number').className;
-            if(songItemNumber === 'song-item-number')
-            {
-                console.log('song target item number is working!');
-            }
+           
 
-
+            var songItem = getSongItem(event.target);
+            if (event.target.parentElement.className === 'album-view-song-item')
+                {  
+                    if (songItem.getAttribute('data-song-number') !== currentlyPlayingSong) 
+                    {
+                        songItem.innerHTML = playButtonTemplate;
+                    }    
+                }
         });
 
         for (i = 0; i < songRows.length; i++) {
@@ -191,7 +206,6 @@ window.onload = function()
                 clickHandler(event.target);
              });
          }
-
     }
     animie();
 
