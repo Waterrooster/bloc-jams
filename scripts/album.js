@@ -91,11 +91,19 @@ var albumPicasso = {
 
      function findParentByClassName(element,targetClass)
      {
-        currentParent = element.parentElement;
-        while(currentParent.className != targetClass)
+        if(element.parentElement == null)
         {
-            currentParent = currentParent.parentElement;
+            currentParent = element;
         }
+        else
+        {
+            currentParent = element.parentElement;    
+    
+            while(currentParent.className != targetClass && currentParent.className != null)
+                {
+                   currentParent = currentParent.parentElement;
+                }    
+        }    
         return currentParent;
      }
 
@@ -103,7 +111,7 @@ var albumPicasso = {
      {
         switch(element.className)
         {
-                    case 'album-song-button':
+        case 'album-song-button':
         case 'ion-play':
         case 'ion-pause':
             return findParentByClassName(element, 'song-item-number');
@@ -136,10 +144,12 @@ var albumPicasso = {
             else if (currentlyPlayingSong !== songItem.getAttribute('data-song-number')) 
             {
                  var currentlyPlayingSongElement = document.querySelector('[data-song-number="' + currentlyPlayingSong + '"]');
+
                  currentlyPlayingSongElement.innerHTML = currentlyPlayingSongElement.getAttribute('data-song-number');
                  songItem.innerHTML = pauseButtonTemplate;
                  currentlyPlayingSong = songItem.getAttribute('data-song-number');
             }
+
        };
 
 
@@ -152,27 +162,38 @@ window.onload = function()
 {     
     setCurrentAlbum(albumPicasso);
 
-    songListContainer.addEventListener('mouseover',function(event)
+    var animie = function()
     {
-        if(event.target.parentElement.className === 'album-view-song-item')
+   
+        songListContainer.addEventListener('mouseover',function(event)
         {
-            event.target.parentElement.querySelector('.song-item-number').innerHTML = playButtonTemplate;
-        }
-    });
+            var songItemNumber = event.target.className;
+            var songChildItem = findParentByClassName(event.target,'song-item-number').className;
+            if(songItemNumber === 'song-item-number')
+            {
+                console.log('song target item number is working!');
+            }
 
-    for (i = 0; i < songRows.length; i++) {
-         songRows[i].addEventListener('mouseleave', function(event) {
-             var leavingSongItem = getSongItem(event.target);
-             var leavingSongItemNumber = leavingSongItem.getAttribute('data-song-number');
- 
-             // #2
-             if (leavingSongItemNumber !== currentlyPlayingSong) {
-                 leavingSongItem.innerHTML = leavingSongItemNumber;
-             }         });
-         songRows[i].addEventListener('click', function(event){
-            clickHandler(event.target);
-         });
-     }
+
+        });
+
+        for (i = 0; i < songRows.length; i++) {
+             songRows[i].addEventListener('mouseleave', function(event) {
+                 var leavingSongItem = getSongItem(event.target);
+                 var leavingSongItemNumber = leavingSongItem.getAttribute('data-song-number');
+     
+                 // #2
+                 if (leavingSongItemNumber !== currentlyPlayingSong) {
+                     leavingSongItem.innerHTML = leavingSongItemNumber;
+                 }         
+             });
+             songRows[i].addEventListener('click', function(event){
+                clickHandler(event.target);
+             });
+         }
+
+    }
+    animie();
 
     var goo = document.getElementsByClassName('album-cover-art')[0];
     var num =1;
@@ -181,14 +202,18 @@ window.onload = function()
         if(num === 1)
         {
             setCurrentAlbum(albumMarconi);
+            animie();
+
         }
         else if(num ===2)
         {
             setCurrentAlbum(albumTaylorSwift);
+            animie();
         }
         else if(num === 3)
         {
             setCurrentAlbum(albumPicasso);
+            animie();
         }
         num++;
 
