@@ -1,32 +1,35 @@
 
 
-window.onload = function()
-{
+$(document).ready(function(){
 	var pointsArray = document.getElementsByClassName('point');
 
-	if(window.innerHeight>950)
+	if($(window).height()>950)
 	{
-		animatePoints(pointsArray);
+		animatePoints();
 	}
-	window.addEventListener('scroll',function()
+
+	$(window).scroll(function(event)
 	{
-		if(pointsArray[0].getBoundingClientRect().top<=500)
+	{
+		if($(window).scrollTop()<=500)
 		{
-			animatePoints(pointsArray);
+			animatePoints();
 		}
+	}	
 	});
-var animatePoints = function(points)
+
+
+
+var animatePoints = function()
 {
-	var revealPoint = function(i)
+	var revealPoint = function()
 	{
-		points[i].style.opacity = 1;
-		points[i].style.transform = 'scaleX(1) translateY(0)';
-		points[i].style.msTransform = 'scaleX(1) translateY(0)';
-		points[i].style.WebkitTransform = 'scaleX(1) translateY(0)';
-	}
-	for(var i = 0; i<points.length;i++)
-	{
-		revealPoint(i);
-	}
-}
-}
+		$(this).css({
+			opacity: 1,
+			transform: 'scaleX(1) translateY(0)'
+		});
+	};
+	$.each($('.point'),revealPoint);
+};
+
+})
